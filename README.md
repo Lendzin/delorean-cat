@@ -6,4 +6,5 @@
 
 - Instead of loading these files as .png which they are saved as, I decided to handle it as if it is an image unknown to me (as it would be through an API) and load a default image upon error.
 
-## Hosted at: [https://lendzin.se/delorean/]
+## Hosted at: https://lendzin.se/delorean/
+* this version does however use the nginx-server as source for the static resource "catdata.json".
