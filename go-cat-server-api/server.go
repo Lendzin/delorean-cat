@@ -9,7 +9,7 @@ import (
 
 func main() {
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"*"},
+		AllowedOrigins: []string{"*"}, // this should not be * in production.
 	})
 	handler := http.FileServer(http.Dir("/cat-app/go-cat-server-api/static"))
 	current := c.Handler(handler)

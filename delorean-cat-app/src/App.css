@@ -11,3 +11,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
+#line {
+  border-bottom: 1px solid greenyellow;
+  margin-bottom: 1em;
+}

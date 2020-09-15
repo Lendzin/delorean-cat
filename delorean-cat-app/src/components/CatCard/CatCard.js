@@ -18,9 +18,8 @@ export const CatCard = ({catData}) => {
         }}
         style={front}
       >
-        <Card.Body style={{width: '18rem'}}>
+        <Card.Body>
           <Card.Img
-            style={{width: '200px', height: '200px'}}
             alt='cat'
             onError={(error) => {
               error.target.src = './images/catmissing.jpg'
@@ -38,10 +37,10 @@ export const CatCard = ({catData}) => {
         }}
         style={back}
       >
-        <Card.Body style={{width: '18rem'}}>
+        <Card.Body>
           <Card.Title>{name} </Card.Title>
           <Card.Text>
-            Has allergyinducing fur?: {allergyInducingFur ? 'yes' : 'no'}
+            Allergy inducing fur: {allergyInducingFur ? 'Yes' : 'No'}
           </Card.Text>
           <Card.Text>Cuteness Level {cutenessLevel}</Card.Text>
           <Card.Text>Lives left: {livesLeft}</Card.Text>

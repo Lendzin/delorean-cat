@@ -1,7 +1,28 @@
 .cat-card {
   margin: 1em;
   box-shadow: 0 0 7px 4px gray;
+  font-size: 1.2rem;
+  align-items: center;
+  min-height: 16rem;
+  max-height: 16rem;
+  min-width: 16rem;
+  perspective: 1000px;
 }
 .cat-card:hover {
   margin-top: 0.2em;
+}
+
+.cat-card img {
+  width: 12rem;
+  height: 12rem;
+}
+
+.card-body {
+  width: 16rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .cat-card:hover {
+    margin-top: 1em;
+  }
 }

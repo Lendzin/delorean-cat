@@ -1,10 +1,11 @@
 import React from 'react'
 import {ButtonGroup, Button} from 'react-bootstrap'
+import './SortingMenu.css'
 export const SortingMenu = ({changeSorting}) => {
   return (
     <>
-      <ButtonGroup style={{margin: '1em'}}>
-        <p style={{color: 'white', marginRight: '1em'}}>Sorting:</p>
+      <ButtonGroup id='sorting-menu'>
+        <p>Sorting:</p>
         <Button onClick={() => changeSorting('None')} variant='primary'>
           None
         </Button>
