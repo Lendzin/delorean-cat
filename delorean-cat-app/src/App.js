@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import {Row, Col} from 'react-bootstrap'
 import {URLs} from './config'
 import axios from 'axios'
 import './App.css'
+import {CatCard} from './components/CatCard/CatCard'
+import {SortingMenu} from './components/SortingMenu'
 
 const App = () => {
   const [defaultCats, setDefaultCats] = useState([])
@@ -24,57 +27,56 @@ const App = () => {
     loadCats()
   }, [])
 
-  useEffect(() => {
-    console.log(cats)
-  }, [cats])
-
   const changeSorting = (sortType) => {
-    let catsToSort = JSON.parse(JSON.stringify(cats))
+    let catsToSort = cats.slice(0)
+
     if (sortType === 'Ascending') {
-      let catsAscending = catsToSort.sort(
-        (a, b) => a.cutenessLevel - b.cutenessLevel
-      )
-      setCats([...catsAscending])
+      setCats([...catsToSort.sort((a, b) => a.cutenessLevel - b.cutenessLevel)])
     } else if (sortType === 'Descending') {
-      let catsDescending = catsToSort.sort(
-        (a, b) => b.cutenessLevel - a.cutenessLevel
-      )
-      setCats([...catsDescending])
-    } else if (sortType === 'Unsorted') {
+      setCats([...catsToSort.sort((a, b) => b.cutenessLevel - a.cutenessLevel)])
+    } else if (sortType === 'None') {
       setCats([...defaultCats])
     }
   }
 
+  const addRowsCols = (children) => {
+    return (
+      <>
+        <Row className='row-cats'>
+          {children.map((element) => {
+            return <Col className='col-cats'>{element}</Col>
+          })}
+        </Row>
+      </>
+    )
+  }
+
+  const setContent = () => {
+    let content = []
+    let array = []
+    let catElements = cats.map((cat) => {
+      return <CatCard catData={cat} />
+    })
+    let elementCopies = catElements.slice(0)
+    while (elementCopies.length > 2) {
+      array.push(elementCopies.splice(0, 2))
+    }
+    array.push(elementCopies)
+    array.forEach((innerArray) => {
+      content.push(addRowsCols(innerArray))
+    })
+    return content
+  }
+
+  const content = setContent()
+
   return (
     <div className='App'>
       <header className='App-header'>
-        <select
-          onChange={(event) => {
-            changeSorting(event.target.value)
-          }}
-        >
-          Sort list:
-          <option key='1'>Unsorted</option>
-          <option key='2'>Ascending</option>
-          <option key='3'>Descending</option>
-        </select>
-        {cats.map((cat) => {
-          return (
-            <>
-              <img
-                onError={(error) => {
-                  // THIS IS NOT A SAFE ACTION IF LOADING PICTURES THAT DO NOT WORK (Infinite reloads)
-                  // (better load a default picture for each failed load)
-                  error.target.onerror = null
-                  error.target.src =
-                    './images/' + cat.image.replace('.jpg', '.png')
-                }}
-                src={`./images/${cat.image}`}
-              />{' '}
-              <p>{cat.name} </p>
-            </>
-          )
-        })}
+        <Row>
+          <SortingMenu changeSorting={changeSorting} />
+        </Row>
+        {content}
       </header>
     </div>
   )

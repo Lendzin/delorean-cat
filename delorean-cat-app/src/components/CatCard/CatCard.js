@@ -1,0 +1,52 @@
+import React, {useState} from 'react'
+import {Card} from 'react-bootstrap'
+import './CatCard.css'
+
+export const CatCard = ({catData}) => {
+  const {image, name, allergyInducingFur, cutenessLevel, livesLeft} = catData
+  const [showBack, setShowBack] = useState(false)
+  const front = showBack ? {display: 'none'} : {}
+  const back = showBack ? {} : {display: 'none'}
+
+  return (
+    <>
+      <Card
+        className='cat-card'
+        id='front'
+        onClick={() => {
+          setShowBack(true)
+        }}
+        style={front}
+      >
+        <Card.Body style={{width: '18rem'}}>
+          <Card.Img
+            style={{width: '200px', height: '200px'}}
+            alt='cat'
+            onError={(error) => {
+              error.target.src = './images/catmissing.jpg'
+            }}
+            src={`./images/${image}`}
+          />{' '}
+        </Card.Body>
+        <Card.Title>{name} </Card.Title>
+      </Card>
+      <Card
+        className='cat-card'
+        id='back'
+        onClick={() => {
+          setShowBack(false)
+        }}
+        style={back}
+      >
+        <Card.Body style={{width: '18rem'}}>
+          <Card.Title>{name} </Card.Title>
+          <Card.Text>
+            Has allergyinducing fur?: {allergyInducingFur ? 'yes' : 'no'}
+          </Card.Text>
+          <Card.Text>Cuteness Level {cutenessLevel}</Card.Text>
+          <Card.Text>Lives left: {livesLeft}</Card.Text>
+        </Card.Body>
+      </Card>
+    </>
+  )
+}

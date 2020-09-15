@@ -1,0 +1,7 @@
+.cat-card {
+  margin: 1em;
+  box-shadow: 0 0 7px 4px gray;
+}
+.cat-card:hover {
+  margin-top: 0.2em;
+}
