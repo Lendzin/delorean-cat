@@ -13,7 +13,7 @@ const App = () => {
   useEffect(() => {
     async function loadCats() {
       try {
-        const response = await axios.get(URLs.catSource)
+        const response = await axios.get(URLs.catSourceLive)
         const catObjects = response.data.cats
         let catObjectsArray = Object.keys(catObjects).map((cat) => {
           return catObjects[cat]
